@@ -20,6 +20,33 @@
         public const string DeleteCategoryById = "sp_Categories_DeleteCategoryById";
         #endregion
 
+        #region Customer
+        public const string GetAllCustomers = "sp_Customers_GetAllCustomers";
+        public const string GetCustomerById = "sp_Customers_GetCustomerById";
+        public const string GetCustomerByName = "sp_Customers_GetCustomerByName";
+        public const string CreateCustomer = "sp_Customers_CreateCustomer";
+        public const string UpdateCustomer = "sp_Customers_UpdateCustomer";
+        public const string DeleteCustomerById = "sp_Customers_DeleteCustomerById";
+        #endregion
+
+        #region Store
+        public const string GetAllStores = "sp_Stores_GetAllStores";
+        public const string GetStoreById = "sp_Stores_GetStoreById";
+        public const string GetStoreByName = "sp_Stores_GetStoreByName";
+        public const string CreateStore = "sp_Stores_CreateStore";
+        public const string UpdateStore = "sp_Stores_UpdateStore";
+        public const string DeleteStoreById = "sp_Stores_DeleteStoreById";
+        #endregion
+
+        #region Product
+        public const string GetAllProducts = "sp_Products_GetAllProducts";
+        public const string GetProductById = "sp_Products_GetProductById";
+        public const string GetProductByName = "sp_Products_GetProductByName";
+        public const string CreateProduct = "sp_Products_CreateProduct";
+        public const string UpdateProduct = "sp_Products_UpdateProduct";
+        public const string DeleteProductById = "sp_Products_DeleteProductById";
+        #endregion
+
 
     }
 }

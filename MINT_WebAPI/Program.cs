@@ -1,7 +1,9 @@
 using MINT_WebAPI.Managers;
 using MINT_WebAPI.Managers.BrandManaging;
 using MINT_WebAPI.Managers.CategoryManaging;
-
+using MINT_WebAPI.Managers.CustomerManaging;
+using MINT_WebAPI.Managers.ProductManaging;
+using MINT_WebAPI.Managers.StoreManaging;
 
 namespace MINT_WebAPI
 {
@@ -13,6 +15,9 @@ namespace MINT_WebAPI
 
             builder.Services.AddScoped<IBrandManager, BrandManager>();
             builder.Services.AddScoped<ICategoryManager, CategoryManager>();
+            builder.Services.AddScoped<ICustomerManager, CustomerManager>();
+            builder.Services.AddScoped<IStoreManager, StoreManager>();
+            builder.Services.AddScoped<IProductManager, ProductManager>();
 
 
             builder.Services.AddControllers();

@@ -13,10 +13,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Managers\CustomerManaging\" />
-    <Folder Include="Managers\ProductManaging\" />
-    <Folder Include="Managers\StoreManaging\" />
-  </ItemGroup>
-
 </Project>
