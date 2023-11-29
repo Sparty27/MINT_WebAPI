@@ -19,12 +19,16 @@ namespace MINT_WebAPI
             builder.Services.AddScoped<IStoreManager, StoreManager>();
             builder.Services.AddScoped<IProductManager, ProductManager>();
 
-
+            builder.Services.AddCors();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                             .AllowAnyHeader()
+                            .AllowAnyMethod());
 
             if (app.Environment.IsDevelopment())
             {

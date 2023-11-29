@@ -1,0 +1,69 @@
+﻿@page "/stores"
+@using MINT_Blazor.Models;
+@inject HttpClient Http
+
+<PageTitle>Stores</PageTitle>
+
+<h1>Stores</h1>
+
+@if (stores == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>State</th>
+                <th>ZipCode</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var store in stores)
+            {
+                <tr>
+                    <td>@store.StoreName</td>
+                    <td>@store.Phone</td>
+                    <td>@store.Email</td>
+                    <td>@store.Street</td>
+                    <td>@store.City</td>
+                    <td>@store.State</td>
+                    <td>@store.ZipCode</td>
+                    <td>
+                        <button class="btn btn-primary" type="button">Edit</button>
+                        <button class="btn btn-danger" type="button" @onclick="() => ModalDialogDelete.Open(store.StoreId)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<ModalDialogDelete @ref="@ModalDialogDelete" Title="Warning!" Stores="@stores"> 
+    <div class="row">
+        <h3>Are you sure you want to delete?</h3>
+        <hr>
+        <div style="display: flex; gap: 50px; justify-content: space-around">
+            <button style="width:200px;" class="btn btn-primary" @onclick="() => ModalDialogDelete.Confirm()">Yes</button>
+            <button style="width:200px;" class="btn btn-danger" @onclick="() => ModalDialogDelete.Close()">No</button>
+        </div>
+    </div>
+</ModalDialogDelete>
+
+@code {
+    private ModalDialogDelete ModalDialogDelete { get; set; }
+
+    private List<Store>? stores;
+
+    protected override async Task OnInitializedAsync()
+    {
+        stores = await Http.GetFromJsonAsync<List<Store>>("api/Store/GetAllStores");
+    }
+}
