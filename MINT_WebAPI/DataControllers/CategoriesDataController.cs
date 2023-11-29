@@ -1,104 +1,105 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using MINT_WebAPI.Models;
 using MINT_WebAPI.Constants;
+using MINT_WebAPI.Models;
 using System.Data;
 
 namespace MINT_WebAPI.DataControllers
 {
-    public class BrandsDataController
+    public class CategoriesDataController
     {
         private readonly string _connectionString;
 
         private SqlConnection GetConnection() => new(_connectionString);
 
-        public BrandsDataController (IConfiguration configuration)
+        public CategoriesDataController(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection")!;
         }
 
-        public IEnumerable<Brand> GetAllBrands()
+        public IEnumerable<Category> GetAllCategories()
         {
             using var connection = GetConnection();
             connection.Open();
 
-            var rows = connection.Query<Brand>(
-                DatabaseConstants.GetAllBrands,
+            var rows = connection.Query<Category>(
+                DatabaseConstants.GetAllCategories,
                 commandType: CommandType.StoredProcedure);
             return rows;
         }
 
-        public Brand? GetBrandById(int id)
+        public Category? GetCategoryById(int id)
         {
             using var connection = GetConnection();
             connection.Open();
 
-            var row = connection.QueryFirstOrDefault<Brand>(
-                DatabaseConstants.GetBrandById,
+            var row = connection.QueryFirstOrDefault<Category>(
+                DatabaseConstants.GetCategoryById,
                 new
                 {
-                    Id = id,
+                    CategoryId = id,
                 },
                 commandType: CommandType.StoredProcedure);
             return row;
         }
 
-        public Brand? GetBrandByName(string name)
+        public Category? GetCategoryByName(string name)
         {
             using var connection = GetConnection();
             connection.Open();
 
-            var row = connection.QueryFirstOrDefault<Brand>(
-                DatabaseConstants.GetBrandByName,
+            var row = connection.QueryFirstOrDefault<Category>(
+                DatabaseConstants.GetCategoryByName,
                 new
                 {
-                    BrandName = name,
+                    CategoryName = name,
                 },
                 commandType: CommandType.StoredProcedure);
             return row;
         }
 
-        public int CreateBrand(Brand brand)
+        public int CreateCategory(Category category)
         {
             using var connection = GetConnection();
             connection.Open();
 
             var row = connection.Execute(
-                DatabaseConstants.CreateBrand,
+                DatabaseConstants.CreateCategory,
                 new
                 {
-                    brand.BrandName,
+                    category.CategoryName,
                 },
                 commandType: CommandType.StoredProcedure);
             return row;
         }
 
-        public int UpdateBrand(Brand brand)
+        public int UpdateCategory(Category category)
         {
             using var connection = GetConnection();
             connection.Open();
 
             var row = connection.Execute(
-                DatabaseConstants.UpdateBrand,
+                DatabaseConstants.UpdateCategory,
                 new
                 {
-                    brand.BrandId,
-                    brand.BrandName,
+                    category.CategoryId,
+                    category.CategoryName,
                 },
                 commandType: CommandType.StoredProcedure);
             return row;
         }
 
-        public int DeleteBrandById(int id)
+        public int DeleteCategoryById(int id)
         {
             using var connection = GetConnection();
             connection.Open();
 
             var row = connection.Execute(
-                DatabaseConstants.DeleteBrandById,
+                DatabaseConstants.DeleteCategoryById,
                 new
                 {
-                    BrandId = id,
+                    CategoryId = id,
                 },
                 commandType: CommandType.StoredProcedure);
             return row;

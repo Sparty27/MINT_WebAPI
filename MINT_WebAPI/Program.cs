@@ -1,5 +1,7 @@
 using MINT_WebAPI.Managers;
 using MINT_WebAPI.Managers.BrandManaging;
+using MINT_WebAPI.Managers.CategoryManaging;
+
 
 namespace MINT_WebAPI
 {
@@ -10,6 +12,8 @@ namespace MINT_WebAPI
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddScoped<IBrandManager, BrandManager>();
+            builder.Services.AddScoped<ICategoryManager, CategoryManager>();
+
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

@@ -1,28 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using MINT_WebAPI.Managers.BrandManaging;
+using MINT_WebAPI.Managers.CategoryManaging;
 using MINT_WebAPI.Models;
 
 namespace MINT_WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandController : Controller
+    public class CategoryController : Controller
     {
-        private readonly IBrandManager _brandManager;
+        private readonly ICategoryManager _categoryManager;
 
-        public BrandController(IBrandManager brandManager) 
+        public CategoryController(ICategoryManager categoryManager)
         {
-            _brandManager = brandManager;   
+            _categoryManager = categoryManager;
         }
 
-        [HttpGet("GetBrands")]
-        public IActionResult GetAllBrands()
+        [HttpGet("GetCategories")]
+        public IActionResult GetAllCategories()
         {
             try
             {
-                var brands = _brandManager.GetAllBrands();
-                return Ok(brands);
+                var categories = _categoryManager.GetAllCategories();
+                return Ok(categories);
             }
             catch (SqlException ex)
             {
@@ -36,14 +36,14 @@ namespace MINT_WebAPI.Controllers
             }
         }
 
-        [HttpGet("GetBrandById")]
-        public IActionResult GetBrandById(int id)
+        [HttpGet("GetCategoryById")]
+        public IActionResult GetCategoryById(int id)
         {
             try
             {
-                var brand = _brandManager.GetBrandById(id);
-                if (brand == null) return BadRequest(new { Message = "Brand was not found"});
-                return Ok(brand);
+                var category = _categoryManager.GetCategoryById(id);
+                if (category == null) return BadRequest(new { Message = "Category was not found" });
+                return Ok(category);
             }
             catch (SqlException ex)
             {
@@ -57,14 +57,14 @@ namespace MINT_WebAPI.Controllers
             }
         }
 
-        [HttpGet("GetBrandByName")]
-        public IActionResult GetBrandByName(string name)
+        [HttpGet("GetCategoryByName")]
+        public IActionResult GetCategoryByName(string name)
         {
             try
             {
-                var brand = _brandManager.GetBrandByName(name);
-                if (brand == null) return BadRequest(new { Message = "Brand was not found" });
-                return Ok(brand);
+                var category = _categoryManager.GetCategoryByName(name);
+                if (category == null) return BadRequest(new { Message = "Category was not found" });
+                return Ok(category);
             }
             catch (SqlException ex)
             {
@@ -78,13 +78,13 @@ namespace MINT_WebAPI.Controllers
             }
         }
 
-        [HttpPost("CreateBrand")]
-        public IActionResult CreateBrand(Brand brand)
+        [HttpPost("CreateCategory")]
+        public IActionResult CreateCategory(Category category)
         {
             try
             {
-                var result = _brandManager.CreateBrand(brand);
-                if (result == 0) return BadRequest(new { Message = "Brand was not created" });
+                var result = _categoryManager.CreateCategory(category);
+                if (result == 0) return BadRequest(new { Message = "Category was not created" });
                 return Ok(result);
             }
             catch (SqlException ex)
@@ -99,13 +99,13 @@ namespace MINT_WebAPI.Controllers
             }
         }
 
-        [HttpPut("UpdateBrand")]
-        public IActionResult UpdateBrand(Brand brand)
+        [HttpPut("UpdateCategory")]
+        public IActionResult UpdateCategory(Category category)
         {
             try
             {
-                var result = _brandManager.UpdateBrand(brand);
-                if (result == 0) return BadRequest(new { Message = "Brand was not updated" });
+                var result = _categoryManager.UpdateCategory(category);
+                if (result == 0) return BadRequest(new { Message = "Category was not updated" });
                 return Ok(result);
             }
             catch (SqlException ex)
@@ -120,13 +120,13 @@ namespace MINT_WebAPI.Controllers
             }
         }
 
-        [HttpDelete("DeleteBrandById")]
-        public IActionResult UpdateBrand(int id)
+        [HttpDelete("DeleteCategoryById")]
+        public IActionResult UpdateCategory(int id)
         {
             try
             {
-                var result = _brandManager.DeleteBrandById(id);
-                if (result == 0) return BadRequest(new { Message = "Brand was not deleted" });
+                var result = _categoryManager.DeleteCategoryById(id);
+                if (result == 0) return BadRequest(new { Message = "Category was not deleted" });
                 return Ok(result);
             }
             catch (SqlException ex)
