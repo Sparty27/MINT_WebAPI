@@ -1,14 +1,13 @@
-﻿@page "/customers"
+﻿@page "/stores"
 @using MINT_Blazor.Models;
 @inject HttpClient Http
+<PageTitle>Stores</PageTitle>
 
-<PageTitle>Customers</PageTitle>
-
-<h1>Customers</h1>
+<h1>Stores</h1>
 
 <button class="btn btn-success button__create-new">Create new</button>
 
-@if (customers == null)
+@if (stores == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -17,8 +16,7 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Street</th>
@@ -29,20 +27,19 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var customer in customers)
+            @foreach (var store in stores)
             {
                 <tr>
-                    <td>@customer.FirstName</td>
-                    <td>@customer.LastName</td>
-                    <td>@customer.Phone</td>
-                    <td>@customer.Email</td>
-                    <td>@customer.Street</td>
-                    <td>@customer.City</td>
-                    <td>@customer.State</td>
-                    <td>@customer.ZipCode</td>
+                    <td>@store.StoreName</td>
+                    <td>@store.Phone</td>
+                    <td>@store.Email</td>
+                    <td>@store.Street</td>
+                    <td>@store.City</td>
+                    <td>@store.State</td>
+                    <td>@store.ZipCode</td>
                     <td>
                         <button class="btn btn-primary" type="button">Edit</button>
-                        <button class="btn btn-danger" type="button" @* @onclick="() => ModalDialogDelete.Open(customer.StoreId)" *@>Delete</button>
+                        <button class="btn btn-danger" type="button" @onclick="() => ModalDialogDelete.Open(store.StoreId)">Delete</button>
                     </td>
                 </tr>
             }
@@ -50,7 +47,7 @@ else
     </table>
 }
 
-@* <ModalDialogDelete @ref="@ModalDialogDelete" Title="Warning!" Stores="@customers"> 
+<ModalDialogDelete @ref="@ModalDialogDelete" Title="Warning!" Stores="@stores"> 
     <div class="row">
         <h3>Are you sure you want to delete?</h3>
         <hr>
@@ -59,15 +56,15 @@ else
             <button style="width:200px;" class="btn btn-danger" @onclick="() => ModalDialogDelete.Close()">No</button>
         </div>
     </div>
-</ModalDialogDelete> *@
+</ModalDialogDelete>
 
 @code {
-    // private ModalDialogDelete ModalDialogDelete { get; set; }
+    private ModalDialogDelete ModalDialogDelete { get; set; }
 
-    private List<Customer>? customers;
+    private List<Store>? stores;
 
     protected override async Task OnInitializedAsync()
     {
-        customers = await Http.GetFromJsonAsync<List<Customer>>("api/Customer/GetAllCustomers");
+        stores = await Http.GetFromJsonAsync<List<Store>>("api/Store/GetAllStores");
     }
 }
