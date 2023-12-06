@@ -1,0 +1,11 @@
+﻿.logo {
+    display: flex;
+    align-items: center;
+
+    &__icon {
+        width: 58px;
+        height: 58px;
+        background-color: white;
+        margin-right: 47px;
+    }
+}

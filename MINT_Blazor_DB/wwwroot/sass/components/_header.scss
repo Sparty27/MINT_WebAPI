@@ -1,0 +1,60 @@
+﻿.header {
+    background-color: #141E61;
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__notifications {
+        width: 39px;
+        height: 39px;
+        fill: white;
+        stroke: white;
+    }
+
+    &__navigation {
+        border: 2px solid white;
+        border-radius: 15px;
+        padding: 15px 121px;
+        gap: 175px;
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        gap: 175px;
+    }
+
+    &__item {
+        font-family: Montserrat;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        color: white;
+    }
+
+    &__profile {
+        display: flex;
+        align-items: center;
+        gap: 17px;
+    }
+
+    &__authorization {
+        color: #FFF;
+        font-family: Montserrat;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    &__avatar-icon {
+        width: 58px;
+        height: 58px;
+        background-color: white;
+    }
+}
